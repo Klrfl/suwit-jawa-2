@@ -35,7 +35,7 @@ main {
   max-width: 100%;
 }
 
-.kalah-menang {
+#kalah-menang {
   background: white;
   padding: 1em;
   border-radius: 0.5em;
