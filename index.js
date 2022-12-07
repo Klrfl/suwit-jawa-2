@@ -1,20 +1,25 @@
 // generate random answer for the computer
-let jawaban = ["gajah", "orang", "semut"];
+const jawaban = ["gajah", "orang", "semut"];
+const choice = document.querySelectorAll(".choice--player");
 
-let choice = document.querySelectorAll(".choice");
+const gambarJawabKomputer = document.querySelector(".choice--computer img");
 
-// listen for click and define player answer
+const kalahmenang = document.getElementById("kalah-menang");
+
+// loop through each item in choice (returns NodeList)
 choice.forEach(function (e) {
+  // listen for click, define computer answer each click
   e.addEventListener("click", () => {
     let random = Math.floor(Math.random() * jawaban.length);
     jawabKomputer = jawaban[random];
-
-    // jawabKomputer = "gajah";
+    gambarJawabKomputer.setAttribute("src", "img/" + jawabKomputer + ".png");
+    gambarJawabKomputer.setAttribute("title", jawabKomputer);
     jawabPlayer = e.getAttribute("data-jawaban");
 
-    // check the answer
+    // initialize to empty string
     let hasil = "";
 
+    // check the answer
     if (jawabKomputer === jawabPlayer) {
       hasil = "seri!";
     } else {
@@ -27,6 +32,6 @@ choice.forEach(function (e) {
       }
     }
 
-    console.log(hasil);
+    kalahmenang.innerHTML = `<p> ${hasil} </p>`;
   });
 });
