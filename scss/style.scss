@@ -10,14 +10,38 @@ body {
 main {
   display: grid;
   place-items: center;
+  min-height: 100vh;
 }
 
 .field {
+  padding: 1em;
+
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  gap: 1em;
+  
+  &--computer{
+    background: dodgerblue;
+  }
+
+  &--player{
+    background: lightgreen;
+  }
 }
 
-img {
-  max-width: 200px;
+.choice{
+  max-width: 100px;
+  cursor: pointer;
+
+  img{
+    max-width: 100%;
+  }
+}
+
+.kalah-menang{
+  background: white;
+  padding: 1em;
+  border-radius: .5em;
+  text-align: center;
 }
