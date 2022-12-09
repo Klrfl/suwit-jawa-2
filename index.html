@@ -10,6 +10,23 @@
   <body>
     <main>
       <h1>Suwit Jawa 2.0</h1>
+      
+      <button id="rules-toggle">Cara bermain</button>
+      <div id="rules-modal">
+        <div class="modal-content">
+          <button id="close-modal" title="tutup aturan">X</button>
+          <h2>Cara bermain Suwit Jawa</h2>
+          <p>Pilih antara Gajah (ibu jari), orang (telunjuk), atau semut (kelingking). Komputer juga akan memilih salah satu dari ketiga pilihan tersebut secara acak.</p>
+          <p>Peraturannya:
+            <ul>
+              <li>gajah mengalahkan manusia,</li>
+              <li>manusia mengalahkan semut,</li>
+              <li>semut mengalahkan gajah.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
       <div class="card">
         <div class="field field--computer">
           <div class="choice choice--computer">
@@ -21,18 +38,18 @@
         </div>
         <div class="field field--player">
           <div class="choice choice--player" data-jawaban="gajah">
-            <img src="img/gajah.png" alt="" />
+            <img src="img/gajah.png" alt="gajah" title="pilh gajah" />
           </div>
           <div class="choice choice--player" data-jawaban="orang">
-            <img src="img/orang.png" alt="" />
+            <img src="img/orang.png" alt="" title="pilih orang" />
           </div>
           <div class="choice choice--player" data-jawaban="semut">
-            <img src="img/semut.png" alt="" />
+            <img src="img/semut.png" alt="" title="pilih semut" />
           </div>
         </div>
       </div>
     </main>
 
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
   </body>
 </html>
