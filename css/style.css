@@ -13,10 +13,56 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
 main {
   display: grid;
   place-items: center;
   min-height: 100vh;
+}
+
+#rules-toggle {
+  all: unset;
+  outline: 1px solid;
+  padding: 0.5em;
+}
+
+#rules-toggle:hover, #rules-toggle:focus-visible {
+  cursor: pointer;
+  background: #888;
+}
+
+#rules-toggle:focus-visible {
+  outline: 3px solid dodgerblue;
+}
+
+#rules-modal {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1rem);
+  display: none;
+  place-items: center;
+  position: absolute;
+  inset: 0;
+}
+
+#rules-modal.active {
+  display: grid;
+}
+
+.modal-content {
+  background: rgb(0, 0, 0);
+  outline: 1px solid;
+  color: #ddd;
+  padding: 2rem;
+  width: 90vmin;
+  position: relative;
+}
+
+#close-modal {
+  position: absolute;
+  right: 2rem;
 }
 
 .card {
