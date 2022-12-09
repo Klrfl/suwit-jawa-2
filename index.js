@@ -1,3 +1,21 @@
+let rulesToggle = document.getElementById("rules-toggle");
+let rulesModal = document.getElementById("rules-modal");
+let closeModal = document.getElementById("close-modal");
+
+rulesToggle.addEventListener("click", () => {
+  rulesModal.classList.add("active");
+});
+
+window.onclick = (event) => {
+  if (event.target == rulesModal) {
+    rulesModal.classList.remove("active");
+  }
+};
+
+closeModal.onclick = () => {
+  closeModal.parentElement.parentElement.classList.remove("active");
+};
+
 // generate random answer for the computer
 const jawaban = ["gajah", "orang", "semut"];
 const choice = document.querySelectorAll(".choice--player");
