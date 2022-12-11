@@ -1,15 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Sans&family=Source+Code+Pro&display=swap");
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
 :root {
   color-scheme: light dark;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  padding: 0;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -27,11 +48,12 @@ main {
   all: unset;
   outline: 1px solid;
   padding: 0.5em;
+  transition: background-color 300ms ease;
 }
 
 #rules-toggle:hover, #rules-toggle:focus-visible {
   cursor: pointer;
-  background: #888;
+  background: #444;
 }
 
 #rules-toggle:focus-visible {
@@ -41,14 +63,21 @@ main {
 #rules-modal {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(1rem);
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: visibility 300ms ease, opacity 300ms ease, transform 300ms ease;
+  display: grid;
   place-items: center;
   position: absolute;
   inset: 0;
+  z-index: 10;
 }
 
 #rules-modal.active {
-  display: grid;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .modal-content {
@@ -63,6 +92,9 @@ main {
 #close-modal {
   position: absolute;
   right: 2rem;
+}
+#close-modal:focus {
+  outline: 4px solid yellow;
 }
 
 .card {
@@ -84,12 +116,41 @@ main {
 }
 
 .choice {
+  all: unset;
   border-radius: 50%;
   max-width: 100px;
+  max-height: 100px;
+  position: relative;
   cursor: pointer;
+  transition: transform 300ms ease, box-shadow 300ms ease, outline 300ms ease;
+}
+.choice:hover, .choice:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: 5px 5px 10px -6px #444;
+}
+.choice:focus-visible {
+  outline: 4px solid yellow;
 }
 .choice img {
   max-width: 100%;
+}
+.choice:not(.choice--computer)::before {
+  content: attr(data-jawaban);
+  background: rgba(68, 68, 68, 0.8666666667);
+  backdrop-filter: blur(2px);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  text-transform: capitalize;
+  opacity: 0;
+  transition: opacity 300ms ease, transform 300ms ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.choice:hover::before, .choice:focus-visible::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
 }
 
 #kalah-menang {

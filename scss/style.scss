@@ -1,15 +1,13 @@
+@use 'resets';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Sans&family=Source+Code+Pro&display=swap');
+
+$transition: 300ms ease;
+
 :root{
   color-scheme: light dark;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -27,11 +25,12 @@ main {
   all: unset;
   outline: 1px solid;
   padding: .5em;
+  transition: background-color $transition;
 }
 
 #rules-toggle:hover, #rules-toggle:focus-visible{
   cursor: pointer;
-  background: #888;
+  background: #444;
 }
 
 #rules-toggle:focus-visible{
@@ -41,17 +40,24 @@ main {
 #rules-modal{
   background: rgb(0, 0, 0, .5);
   backdrop-filter: blur(1rem);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: visibility $transition, opacity $transition, transform $transition;
   // center modal in the middle
-  display: none;
+  display: grid;
   place-items: center;
 
   // fill the whole screen
   position: absolute;
   inset: 0;
+  z-index: 10;
 }
 
 #rules-modal.active{
-  display: grid;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .modal-content{
@@ -66,6 +72,10 @@ main {
 #close-modal{
   position: absolute;
   right: 2rem;
+
+  &:focus{
+    outline: 4px solid yellow;
+  }
 }
 
 .card{
@@ -90,12 +100,46 @@ main {
 }
 
 .choice{
+  all: unset;
   border-radius: 50%;
   max-width: 100px;
+  max-height: 100px;
+  position: relative;
   cursor: pointer;
+  transition: transform $transition, box-shadow $transition, outline $transition;
 
+  &:hover, &:focus-visible{
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 10px -6px #444;
+  }
+
+  &:focus-visible{
+    outline: 4px solid yellow;
+  }
+  
   img{
     max-width: 100%;
+  }
+
+  &:not(.choice--computer)::before{
+    content: attr(data-jawaban);
+    background: #444d;
+    backdrop-filter: blur(2px);
+    padding: .5em;
+    border-radius: .5em;
+    text-transform: capitalize;
+    opacity: 0;
+    transition: opacity $transition, transform $transition;
+    
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &:hover::before, &:focus-visible::before{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
   }
 }
 
