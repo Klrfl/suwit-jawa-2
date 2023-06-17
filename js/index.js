@@ -2,6 +2,7 @@ let rulesToggle = document.getElementById("rules-toggle");
 let rulesModal = document.getElementById("rules-modal");
 let closeModal = document.getElementById("close-modal");
 
+// toggle modal
 rulesToggle.addEventListener("click", () => {
   rulesModal.classList.add("active");
 });
@@ -19,10 +20,24 @@ closeModal.onclick = () => {
 // generate random answer for the computer
 const jawaban = ["gajah", "orang", "semut"];
 const choice = document.querySelectorAll(".choice--player");
-
 const gambarJawabKomputer = document.querySelector(".choice--computer img");
-
 const kalahmenang = document.getElementById("kalah-menang");
+
+// initialize to empty string
+let hasil = "";
+
+function shuffleGambar() {
+  let i = 0;
+  const waktuMulai = new Date();
+  const interval = setInterval(function () {
+    if (new Date() - waktuMulai > 1000) {
+      clearInterval(interval);
+    }
+
+    gambarJawabKomputer.setAttribute("src", "img/" + jawaban[i++] + ".png");
+    if (i == jawaban.length) i = 0;
+  }, 50);
+}
 
 // loop through each item in choice (returns NodeList)
 choice.forEach(function (e) {
@@ -32,10 +47,8 @@ choice.forEach(function (e) {
     jawabKomputer = jawaban[random];
     gambarJawabKomputer.setAttribute("src", "img/" + jawabKomputer + ".png");
     gambarJawabKomputer.setAttribute("title", jawabKomputer);
-    jawabPlayer = e.getAttribute("data-jawaban");
 
-    // initialize to empty string
-    let hasil = "";
+    jawabPlayer = e.getAttribute("data-jawaban");
 
     // check the answer
     if (jawabKomputer === jawabPlayer) {
@@ -50,6 +63,13 @@ choice.forEach(function (e) {
       }
     }
 
-    kalahmenang.innerHTML = `<p> ${hasil} </p>`;
+    shuffleGambar();
+
+    kalahmenang.innerHTML = `<p>Menunggu komputer...</p>`;
+
+    // add result after one second
+    setTimeout(() => {
+      kalahmenang.innerHTML = `<p> ${hasil} </p>`;
+    }, 1000);
   });
 });
