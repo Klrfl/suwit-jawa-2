@@ -27,7 +27,7 @@ function shuffleGambar() {
   let i = 0;
 
   const waktuMulai = new Date();
-  const interval = setInterval(function () {
+  const interval = setInterval(() => {
     if (new Date() - waktuMulai > 1000) {
       clearInterval(interval);
     }
@@ -42,16 +42,13 @@ function shuffleGambar() {
 let hasil = "";
 
 // loop through each item in choice (returns NodeList)
-semuaPilihan.forEach(function (pilihan) {
-  pilihan.addEventListener("click", () => {
-    // define computer answer, set image accordingly
+semuaPilihan.forEach(function (pilihanEl) {
+  pilihanEl.addEventListener("click", () => {
+    // define computer answer
     const angkaRandom = Math.floor(Math.random() * jawaban.length);
     const jawabanKomputer = jawaban[angkaRandom];
 
-    gambarJawabanKomputer.setAttribute("src", `img/${jawabanKomputer}.png`);
-    gambarJawabanKomputer.setAttribute("title", jawabanKomputer);
-
-    const jawabanPemain = pilihan.getAttribute("data-jawaban");
+    const jawabanPemain = pilihanEl.dataset.jawaban;
 
     // check the answer
     if (jawabanKomputer === jawabanPemain) {
@@ -66,12 +63,14 @@ semuaPilihan.forEach(function (pilihan) {
       }
     }
 
-    shuffleGambar();
     kalahMenangEl.innerHTML = `<p>Menunggu komputer...</p>`;
+    shuffleGambar();
 
-    // add result after one second
+    // add result and set computer answer image after one second
     setTimeout(() => {
-      kalahMenangEl.innerHTML = `<p> ${hasil} </p>`;
+      kalahMenangEl.innerHTML = `<p>${hasil}</p>`;
+      gambarJawabanKomputer.setAttribute("src", `img/${jawabanKomputer}.png`);
+      gambarJawabanKomputer.setAttribute("title", jawabanKomputer);
     }, 1000);
   });
 });
