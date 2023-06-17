@@ -1,75 +1,77 @@
-let rulesToggle = document.getElementById("rules-toggle");
+let rulesToggleBtn = document.getElementById("rules-toggle");
 let rulesModal = document.getElementById("rules-modal");
-let closeModal = document.getElementById("close-modal");
+let closeModalBtn = document.getElementById("close-modal");
 
 // toggle modal
-rulesToggle.addEventListener("click", () => {
+rulesToggleBtn.addEventListener("click", () => {
   rulesModal.classList.add("active");
 });
 
-window.onclick = (event) => {
-  if (event.target == rulesModal) {
+closeModalBtn.addEventListener("click", () => {
+  rulesModal.classList.remove("active");
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target == rulesModal) {
     rulesModal.classList.remove("active");
   }
-};
-
-closeModal.onclick = () => {
-  closeModal.parentElement.parentElement.classList.remove("active");
-};
+});
 
 // generate random answer for the computer
 const jawaban = ["gajah", "orang", "semut"];
-const choice = document.querySelectorAll(".choice--player");
-const gambarJawabKomputer = document.querySelector(".choice--computer img");
-const kalahmenang = document.getElementById("kalah-menang");
-
-// initialize to empty string
-let hasil = "";
+const semuaPilihan = document.querySelectorAll(".choice--player");
+const gambarJawabanKomputer = document.querySelector(".choice--computer img");
+const kalahMenangEl = document.getElementById("kalah-menang");
 
 function shuffleGambar() {
   let i = 0;
+
   const waktuMulai = new Date();
   const interval = setInterval(function () {
     if (new Date() - waktuMulai > 1000) {
       clearInterval(interval);
     }
 
-    gambarJawabKomputer.setAttribute("src", "img/" + jawaban[i++] + ".png");
+    // set images
+    gambarJawabanKomputer.setAttribute("src", `img/${jawaban[i++]}.png`);
     if (i == jawaban.length) i = 0;
   }, 50);
 }
 
-// loop through each item in choice (returns NodeList)
-choice.forEach(function (e) {
-  // listen for click, define computer answer each click
-  e.addEventListener("click", () => {
-    let random = Math.floor(Math.random() * jawaban.length);
-    jawabKomputer = jawaban[random];
-    gambarJawabKomputer.setAttribute("src", "img/" + jawabKomputer + ".png");
-    gambarJawabKomputer.setAttribute("title", jawabKomputer);
+// initialize to empty string
+let hasil = "";
 
-    jawabPlayer = e.getAttribute("data-jawaban");
+// loop through each item in choice (returns NodeList)
+semuaPilihan.forEach(function (pilihan) {
+  pilihan.addEventListener("click", () => {
+    // define computer answer, set image accordingly
+    const angkaRandom = Math.floor(Math.random() * jawaban.length);
+    const jawabanKomputer = jawaban[angkaRandom];
+
+    gambarJawabanKomputer.setAttribute("src", `img/${jawabanKomputer}.png`);
+    gambarJawabanKomputer.setAttribute("title", jawabanKomputer);
+
+    const jawabanPemain = pilihan.getAttribute("data-jawaban");
 
     // check the answer
-    if (jawabKomputer === jawabPlayer) {
+    if (jawabanKomputer === jawabanPemain) {
       hasil = "seri!";
     } else {
-      if (jawabPlayer === "orang") {
-        hasil = jawabKomputer === "gajah" ? "Kalah!" : "Menang!";
-      } else if (jawabPlayer === "semut") {
-        hasil = jawabKomputer === "gajah" ? "Menang!" : "Kalah";
-      } else if (jawabPlayer === "gajah") {
-        hasil = jawabKomputer === "semut" ? "Kalah!" : "Menang!";
+      if (jawabanPemain === "orang") {
+        hasil = jawabanKomputer === "gajah" ? "Kalah!" : "Menang!";
+      } else if (jawabanPemain === "semut") {
+        hasil = jawabanKomputer === "gajah" ? "Menang!" : "Kalah!";
+      } else if (jawabanPemain === "gajah") {
+        hasil = jawabanKomputer === "semut" ? "Kalah!" : "Menang!";
       }
     }
 
     shuffleGambar();
-
-    kalahmenang.innerHTML = `<p>Menunggu komputer...</p>`;
+    kalahMenangEl.innerHTML = `<p>Menunggu komputer...</p>`;
 
     // add result after one second
     setTimeout(() => {
-      kalahmenang.innerHTML = `<p> ${hasil} </p>`;
+      kalahMenangEl.innerHTML = `<p> ${hasil} </p>`;
     }, 1000);
   });
 });
