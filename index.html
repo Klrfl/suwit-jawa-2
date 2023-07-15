@@ -4,28 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Suwit Jawa 2.0, sekarang dengan antarmuka grafis." />
     <title>Suwit Jawa</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
     <main>
-      <h1>Suwit Jawa 2.0</h1>
-      
-      <button id="rules-toggle">Cara bermain</button>
-      <div id="rules-modal">
-        <div class="modal-content">
-          <button id="close-modal" title="tutup aturan">X</button>
-          <h2>Cara bermain Suwit Jawa</h2>
-          <p>Pilih antara Gajah (ibu jari), orang (telunjuk), atau semut (kelingking). Komputer juga akan memilih salah satu dari ketiga pilihan tersebut secara acak.</p>
-          <p>Peraturannya:
+      <header>
+        <h1>Suwit Jawa 2.0</h1>
+        <button id="rules-toggle" autofocus>Cara bermain</button>
+        <dialog id="rules-modal">
+          <form method="dialog">
+            <h2>Cara bermain Suwit Jawa</h2>
+            <p>
+              Pilih antara Gajah (ibu jari), orang (telunjuk), atau semut
+              (kelingking). Komputer juga akan memilih salah satu dari ketiga
+              pilihan tersebut secara acak.
+            </p>
+            <p>Peraturannya:</p>
             <ul>
               <li>gajah mengalahkan manusia,</li>
               <li>manusia mengalahkan semut,</li>
               <li>semut mengalahkan gajah.</li>
             </ul>
-          </p>
-        </div>
-      </div>
+            <button id="close-modal" autofocus>OK</button>
+          </form>
+        </dialog>
+      </header>
 
       <div class="card">
         <div class="field field--computer">

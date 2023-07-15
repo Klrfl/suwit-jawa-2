@@ -4,17 +4,7 @@ let closeModalBtn = document.getElementById("close-modal");
 
 // toggle modal
 rulesToggleBtn.addEventListener("click", () => {
-  rulesModal.classList.add("active");
-});
-
-closeModalBtn.addEventListener("click", () => {
-  rulesModal.classList.remove("active");
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target == rulesModal) {
-    rulesModal.classList.remove("active");
-  }
+  rulesModal.showModal();
 });
 
 // generate random answer for the computer

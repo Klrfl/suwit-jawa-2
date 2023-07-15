@@ -46,26 +46,33 @@ header {
 }
 
 #rules-modal {
-  background: rgb(0, 0, 0, 0.5);
-  backdrop-filter: blur(1rem);
+  padding: 2rem;
+  max-width: 75ch;
+  min-height: 50%;
+  text-align: left;
+
+  // require flex for some reason
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+
+  pointer-events: none;
   visibility: hidden;
   opacity: 0;
   transform: translateY(-10px);
   transition: visibility $transition, opacity $transition, transform $transition;
-  // center modal in the middle
-  display: grid;
-  place-items: center;
-
-  // fill the whole screen
-  position: absolute;
-  inset: 0;
-  z-index: 10;
 }
 
-#rules-modal.active {
-  opacity: 1;
+#rules-modal[open] {
+  pointer-events: inherit;
   visibility: visible;
+  opacity: 1;
   transform: translateY(0);
+}
+
+#rules-modal::backdrop {
+  backdrop-filter: blur(1rem);
 }
 
 .modal-content {
