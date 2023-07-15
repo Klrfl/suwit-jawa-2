@@ -1,17 +1,17 @@
-@use 'resets';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Sans&family=Source+Code+Pro&display=swap');
+@use "resets";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Sans&family=Source+Code+Pro&display=swap");
 
 $transition: 300ms ease;
 
-:root{
+:root {
   color-scheme: light dark;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
@@ -21,24 +21,25 @@ main {
   min-height: 100vh;
 }
 
-#rules-toggle{
+#rules-toggle {
   all: unset;
   outline: 1px solid;
-  padding: .5em;
+  padding: 0.5em;
   transition: background-color $transition;
 }
 
-#rules-toggle:hover, #rules-toggle:focus-visible{
+#rules-toggle:hover,
+#rules-toggle:focus-visible {
   cursor: pointer;
   background: #444;
 }
 
-#rules-toggle:focus-visible{
+#rules-toggle:focus-visible {
   outline: 3px solid dodgerblue;
 }
 
-#rules-modal{
-  background: rgb(0, 0, 0, .5);
+#rules-modal {
+  background: rgb(0, 0, 0, 0.5);
   backdrop-filter: blur(1rem);
   visibility: hidden;
   opacity: 0;
@@ -54,13 +55,13 @@ main {
   z-index: 10;
 }
 
-#rules-modal.active{
+#rules-modal.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.modal-content{
+.modal-content {
   background: rgb(0, 0, 0);
   outline: 1px solid;
   color: #ddd;
@@ -69,16 +70,16 @@ main {
   position: relative;
 }
 
-#close-modal{
+#close-modal {
   position: absolute;
   right: 2rem;
 
-  &:focus{
+  &:focus {
     outline: 4px solid yellow;
   }
 }
 
-.card{
+.card {
   outline: 1px solid;
 }
 
@@ -89,17 +90,17 @@ main {
   justify-content: space-evenly;
   align-items: center;
   gap: 1em;
-  
-  &--computer{
+
+  &--computer {
     background: dodgerblue;
   }
 
-  &--player{
+  &--player {
     background: lightgreen;
   }
 }
 
-.choice{
+.choice {
   all: unset;
   border-radius: 50%;
   max-width: 100px;
@@ -108,43 +109,45 @@ main {
   cursor: pointer;
   transition: transform $transition, box-shadow $transition, outline $transition;
 
-  &:hover, &:focus-visible{
+  &:hover,
+  &:focus-visible {
     transform: translateY(-5px);
     box-shadow: 5px 5px 10px -6px #444;
   }
 
-  &:focus-visible{
+  &:focus-visible {
     outline: 4px solid yellow;
   }
-  
-  img{
+
+  img {
     max-width: 100%;
   }
 
-  &:not(.choice--computer)::before{
+  &:not(.choice--computer)::before {
     content: attr(data-jawaban);
     background: #444d;
     backdrop-filter: blur(2px);
-    padding: .5em;
-    border-radius: .5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
     text-transform: capitalize;
     opacity: 0;
     transition: opacity $transition, transform $transition;
-    
+
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  &:hover::before, &:focus-visible::before{
+  &:hover::before,
+  &:focus-visible::before {
     opacity: 1;
     transform: translateX(-50%) translateY(-10px);
   }
 }
 
-#kalah-menang{
+#kalah-menang {
   padding: 1em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   text-align: center;
 }

@@ -51,7 +51,8 @@ main {
   transition: background-color 300ms ease;
 }
 
-#rules-toggle:hover, #rules-toggle:focus-visible {
+#rules-toggle:hover,
+#rules-toggle:focus-visible {
   cursor: pointer;
   background: #444;
 }
