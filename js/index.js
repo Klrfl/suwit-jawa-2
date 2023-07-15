@@ -7,40 +7,39 @@ rulesToggleBtn.addEventListener("click", () => {
   rulesModal.showModal();
 });
 
-// generate random answer for the computer
 const jawaban = ["gajah", "orang", "semut"];
 const semuaPilihan = document.querySelectorAll(".choice--player");
 const gambarJawabanKomputer = document.querySelector(".choice--computer img");
 const kalahMenangEl = document.getElementById("kalah-menang");
+
+const DELAY = 1000;
 
 function shuffleGambar() {
   let i = 0;
 
   const waktuMulai = new Date();
   const interval = setInterval(() => {
-    if (new Date() - waktuMulai > 1000) {
+    if (new Date() - waktuMulai > DELAY) {
       clearInterval(interval);
     }
 
     // set images
     gambarJawabanKomputer.setAttribute("src", `img/${jawaban[i++]}.png`);
-    if (i == jawaban.length) i = 0;
+    if (i === jawaban.length) i = 0;
   }, 50);
 }
 
-// initialize to empty string
 let hasil = "";
 
 // loop through each item in choice (returns NodeList)
-semuaPilihan.forEach(function (pilihanEl) {
+semuaPilihan.forEach((pilihanEl) => {
   pilihanEl.addEventListener("click", () => {
-    // define computer answer
+    // get computer and player's answer
     const angkaRandom = Math.floor(Math.random() * jawaban.length);
     const jawabanKomputer = jawaban[angkaRandom];
-
     const jawabanPemain = pilihanEl.dataset.jawaban;
 
-    // check the answer
+    // check both against one another
     if (jawabanKomputer === jawabanPemain) {
       hasil = "seri!";
     } else {
@@ -61,6 +60,6 @@ semuaPilihan.forEach(function (pilihanEl) {
       kalahMenangEl.innerHTML = `<p>${hasil}</p>`;
       gambarJawabanKomputer.setAttribute("src", `img/${jawabanKomputer}.png`);
       gambarJawabanKomputer.setAttribute("title", jawabanKomputer);
-    }, 1000);
+    }, DELAY + 100);
   });
 });
